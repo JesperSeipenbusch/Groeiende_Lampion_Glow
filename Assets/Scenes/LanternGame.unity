@@ -1089,6 +1089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 555956465}
   - component: {fileID: 555956464}
+  - component: {fileID: 555956466}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3208,7 +3209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2027018234
 MonoBehaviour:
   m_ObjectHideFlags: 0
