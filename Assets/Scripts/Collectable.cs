@@ -13,7 +13,7 @@ public class Collectable : MonoBehaviour
     private void Awake()
     {
         startPosition = transform.position;
-        target = new Vector3(0,0,0);
+        target = new Vector3(0,0,10);
     }
     private void OnTriggerEnter(Collider _Coll)
     {
