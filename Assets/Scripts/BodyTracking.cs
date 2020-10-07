@@ -8,9 +8,6 @@ public class BodyTracking : MonoBehaviour
     public GameObject BodySourceManager;
     public GameObject handPrefab;
 
-    private Rigidbody2D handPointRight;
-    private Rigidbody2D handPointLeft;
-
     private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
     private BodySourceManager _BodyManager;
 
@@ -76,6 +73,7 @@ public class BodyTracking : MonoBehaviour
             if (body.IsTracked)
             {
                 trackedIds.Add(body.TrackingId);
+                Debug.Log(body.TrackingId);
             }
         }
 
@@ -86,6 +84,7 @@ public class BodyTracking : MonoBehaviour
         {
             if (!trackedIds.Contains(trackingId))
             {
+
                 Destroy(_Bodies[trackingId]);
                 _Bodies.Remove(trackingId);
             }
@@ -123,11 +122,11 @@ public class BodyTracking : MonoBehaviour
 
             if (jt == Kinect.JointType.HandRight)
             {
-                handPointRight = Instantiate(handPrefab, jointObj.transform).GetComponent<Rigidbody2D>();
+                Instantiate(handPrefab, jointObj.transform).GetComponent<Rigidbody2D>();
             }
             else if (jt == Kinect.JointType.HandLeft)
             {
-                handPointLeft = Instantiate(handPrefab, jointObj.transform).GetComponent<Rigidbody2D>();
+                Instantiate(handPrefab, jointObj.transform).GetComponent<Rigidbody2D>();
             }
 
             jointObj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
@@ -152,15 +151,6 @@ public class BodyTracking : MonoBehaviour
 
             Transform jointObj = bodyObject.transform.Find(jt.ToString());
             jointObj.localPosition = GetVector3FromJoint(sourceJoint);
-
-            if (jt == Kinect.JointType.HandRight && handPointRight != null)
-            {
-                handPointRight.MovePosition(jointObj.position);
-            }
-            else if (jt == Kinect.JointType.HandLeft && handPointLeft != null)
-            {
-                handPointLeft.MovePosition(jointObj.position);
-            }
         }
     }
 
