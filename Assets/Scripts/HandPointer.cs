@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class HandPointer : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D col)
+    public GameObject visualHand;
+    private Rigidbody hand;
+    public Vector3 visualPos;
+    public float depth;
+
+    void Start()
     {
-        if (col.CompareTag("Light"))
-        {
-            Debug.Log("Collected light");
-            StartCoroutine(Lights(col.gameObject));
-        }
+        visualPos = new Vector3(transform.position.x, transform.position.y, depth);
+        hand = Instantiate(visualHand, visualPos, Quaternion.identity).GetComponent<Rigidbody>();
     }
 
-    private IEnumerator Lights(GameObject ob)
+    void Update()
     {
-        float i = Random.Range(2.0f, 4.5f);
-        ob.SetActive(false);
-        yield return new WaitForSeconds(i);
-        ob.SetActive(true);
+        visualPos = new Vector3(transform.position.x, transform.position.y, depth);
+        hand.MovePosition(visualPos);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(hand.gameObject);
     }
 }
