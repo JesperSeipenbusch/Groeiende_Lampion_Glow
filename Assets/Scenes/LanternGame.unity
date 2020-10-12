@@ -1021,9 +1021,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2363e24a4db84907a1689ec9e15bd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectable: {fileID: 4915711611067527355, guid: 5e85093847afe3c4983cd4be33380123, type: 3}
+  collectable: {fileID: 4321982599978534088, guid: b61f8536775e8498fb6b7fcae9f5d58f, type: 3}
+  flyingLantern: {fileID: 3386498113630524332, guid: bd28036a7736944a79336c7f216b04d8, type: 3}
   timer: 0
-  margin: 0
+  isCollectable: 0
+  topMargin: 0
+  bottomMargin: 0
+  sideMargin: 0
   upperRight: {x: 0, y: 0, z: 0}
   lowerLeft: {x: 0, y: 0, z: 0}
 --- !u!1001 &643685915

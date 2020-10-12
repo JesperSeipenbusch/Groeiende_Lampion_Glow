@@ -10,8 +10,12 @@ public class CollectionManager : MonoBehaviour
     private int maxCollectables;
     static int currentCollectables;
 
+    [Header("Prefabs")]
     public GameObject collectable;
 
+    public GameObject flyingLantern;
+    
+    [Header("Timer")]
     public float timer;
 
 
@@ -19,8 +23,19 @@ public class CollectionManager : MonoBehaviour
     Camera cam;
     float scWidth;
     float scHeight;
-    public float margin;
+
+    public bool isCollectable;
+    [Header("Screen margins")]
+    public float topMargin;
+    public float bottomMargin;
+    public float sideMargin;
+
+    float depth;
+
+    Vector3 CollectableRP;
+    public static Vector3 flyingLanternRP;
     
+    [Header("Screen corner positions")]
     [SerializeField]
     Vector3 upperRight;
     [SerializeField]
@@ -31,31 +46,46 @@ public class CollectionManager : MonoBehaviour
     void Awake()
     {
         cam = Camera.main;
-        
-        margin = 0.3f;
 
+        timer = 2f;
+        
+        topMargin = 0.3f;
+        bottomMargin = 0.3f;
+        sideMargin = 0.3f;
+
+        isCollectable = true;
         maxCollectables = 4;
     }
     private void FixedUpdate()
     {
+        if(isCollectable)
+        {
+            bottomMargin = 1f;
+            depth = 0f;
+        }
+        else
+        {
+            bottomMargin = 26f;
+            depth = 30;
+        }
         Timer();
-        Findborders();
+        Findborders(depth);
     }
-    void Findborders()
+    void Findborders(float d)
     {
-        scWidth = 1/(cam.WorldToViewportPoint(new Vector3(1, 1, 0)).x - .5f);
-        scHeight = 1/(cam.WorldToViewportPoint(new Vector3(1, 1, 0)).y - .5f);
+        scWidth = 1/(cam.WorldToViewportPoint(new Vector3(1, 1, d)).x - .5f);
+        scHeight = 1/(cam.WorldToViewportPoint(new Vector3(1, 1, d)).y - .5f);
 
-        upperRight = new Vector3(scWidth / 2 - margin, scHeight / 2 - margin, 0);
-        lowerLeft = new Vector3(-scWidth / 2 + margin, -scHeight / 2 + margin, 0);
+        upperRight = new Vector3(scWidth / 2 - sideMargin, scHeight / 2 - topMargin, 0);
+        lowerLeft = new Vector3(-scWidth / 2 + sideMargin, -scHeight / 2 + bottomMargin, 0);
     }
+
     void Timer()
     {
         if(timer <= 0)
         {
             timer = Random.Range(0f, 5f);
             CheckMax();
-
         }
         else
         {
@@ -71,28 +101,43 @@ public class CollectionManager : MonoBehaviour
         }
         else
         {
-            return;
+            SpawnFlyingLantern();
+            //return;
         }
     }
     void SpawnCollectable()
     {
-        Vector3 rp;
-        rp = new Vector3(Random.Range(lowerLeft.x, upperRight.x), Random.Range(lowerLeft.y, upperRight.y), 0);
+        isCollectable = true;
+        CollectableRP = FindRandomPoint();
+        Instantiate(collectable, CollectableRP, Quaternion.identity);
+        currentCollectables++;
+    }
+
+    void SpawnFlyingLantern()
+    {
+        isCollectable = false;
+        flyingLanternRP = FindRandomPoint();
+    
+        Vector3 spawnPoint = new Vector3(0,-5,-10);
+        Instantiate(flyingLantern, spawnPoint, Quaternion.identity);
+    }
+
+    Vector3 FindRandomPoint()
+    {
+        Debug.Log("point is being found");
+        Vector3 rp = new Vector3(Random.Range(lowerLeft.x, upperRight.x), Random.Range(lowerLeft.y, upperRight.y),  depth);
 
         //checks if there is another collectable nearby, if so returns and picks a new rp (random position).
         Collider[] hitColliders = Physics.OverlapSphere(rp, 1f);
-        Debug.Log(hitColliders.Length);
         if(hitColliders.Length > 0)
         {
-            Debug.Log("Found something");
-            return;
+            Debug.Log("Found something... Finding new Random point");
+            return FindRandomPoint();
         }
         else
         {
-            Instantiate(collectable, rp, Quaternion.identity);
-            currentCollectables++;
+            return rp;
         }
-
     }
     
     #region Static Methods
@@ -100,7 +145,6 @@ public class CollectionManager : MonoBehaviour
     public static void AddScore()
     {
         score++;
-        Debug.Log(score);
     }
     public static void RemoveCollectableCount()
     {
