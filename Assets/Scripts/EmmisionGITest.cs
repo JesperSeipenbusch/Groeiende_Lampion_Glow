@@ -11,6 +11,7 @@ public class EmmisionGITest : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         color = rend.material.GetColor("_EmissionColor");
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
     // Update is called once per frame
