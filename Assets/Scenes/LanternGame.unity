@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.65080994, g: 0.666729, b: 0.7075472, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.02
+  m_FogMode: 2
+  m_FogDensity: 0.005
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &83637205
 Transform:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83637204}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -303,7 +303,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 0
+  m_ScaleInLightmap: 0.1
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -2164,7 +2164,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638992846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2183,7 +2183,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 0
+  m_ScaleInLightmap: 0.1
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -2606,7 +2606,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721730607}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2625,7 +2625,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 0
+  m_ScaleInLightmap: 0.1
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -2770,7 +2770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1802603780
 Transform:
   m_ObjectHideFlags: 0
@@ -2902,7 +2902,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893762101}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2921,7 +2921,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 0
+  m_ScaleInLightmap: 0.1
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -3471,18 +3471,18 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5377739018294452933, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
+  - {fileID: 2100000, guid: dbe871cf94f75234c9a35569fe79ad6a, type: 2}
   - {fileID: 2934955800964590389, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
   - {fileID: -2435214512123833766, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
   - {fileID: 8668964879408942006, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
   - {fileID: -3661639628750336703, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
   - {fileID: -1709277514330460371, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
-  - {fileID: 6456940790829494949, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
+  - {fileID: 2100000, guid: 7f191e5daa124d943a5efcc5513940ec, type: 2}
   - {fileID: -4053520464898690182, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
-  - {fileID: 2878906130077978799, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
+  - {fileID: 2100000, guid: 7f191e5daa124d943a5efcc5513940ec, type: 2}
   - {fileID: 18858803709778759, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
   - {fileID: -333415491942882640, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
-  - {fileID: -1381909053062557729, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
+  - {fileID: 2100000, guid: 7f191e5daa124d943a5efcc5513940ec, type: 2}
   - {fileID: -4691077435805298734, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
   - {fileID: 239378781582670930, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
   - {fileID: -7203686037160272, guid: b017208847e592b4c9dc9d0e78d98dc2, type: 3}
