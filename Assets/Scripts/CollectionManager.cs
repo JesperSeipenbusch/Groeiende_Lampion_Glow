@@ -8,6 +8,15 @@ public class CollectionManager : MonoBehaviour
 
     [SerializeField]
     int score = 0;
+    int Score
+    {
+        get { return score; }
+        set
+        {
+            score = value;
+            LightManager.Instance.SetScore(score);
+        }
+    }
 
     private int maxCollectables;
     static int currentCollectables;
@@ -77,7 +86,7 @@ public class CollectionManager : MonoBehaviour
         timer = 2f;
         
         topMargin = 0.3f;
-        bottomMargin = 0.3f;
+        bottomMargin = 1f;
         sideMargin = 0.3f;
 
         IsCollectable = true;
@@ -117,10 +126,6 @@ public class CollectionManager : MonoBehaviour
         {
             SpawnCollectable();
         }
-        else
-        {
-            SpawnFlyingLantern();
-        }
     }
     void SpawnCollectable()
     {
@@ -136,7 +141,7 @@ public class CollectionManager : MonoBehaviour
         targetRP = FindRandomPoint();
     }
 
-    void SpawnFlyingLantern()
+    public void SpawnFlyingLantern()
     {
         IsCollectable = false;
         flyingLanternRP = FindRandomPoint();
@@ -147,14 +152,14 @@ public class CollectionManager : MonoBehaviour
 
     Vector3 FindRandomPoint()
     {
-        Debug.Log("point is being found");
+        //Debug.Log("point is being found");
         Vector3 rp = new Vector3(Random.Range(lowerLeft.x, upperRight.x), Random.Range(lowerLeft.y, upperRight.y),  depth);
 
         //checks if there is another collectable nearby, if so returns and picks a new rp (random position).
         Collider[] hitColliders = Physics.OverlapSphere(rp, 1f);
         if(hitColliders.Length > 0)
         {
-            Debug.Log("Found something... Finding new Random point");
+            //Debug.Log("Found something... Finding new Random point");
             return FindRandomPoint();
         }
         else
@@ -165,7 +170,7 @@ public class CollectionManager : MonoBehaviour
             
     public void AddScore()
     {
-        score++;
+        Score++;
     }
     public void RemoveCollectableCount()
     {

@@ -6,6 +6,10 @@ public class LightManager : MonoBehaviour
 {
     private static LightManager _instance;
 
+    private float score;
+    private float oldScore = 0;
+    public float maxScore;
+
     public List<LightScript> AllLights;
     public List<LightGroup> Groups = new List<LightGroup>();
 
@@ -52,6 +56,12 @@ public class LightManager : MonoBehaviour
             LightGroup lGroep = GetOrCreate(l.groupID);
             lGroep.Add(l);
         }
+        Blackout();
+    }
+
+    public void SetScore(int _score)
+    {
+        score = _score;
     }
 
     LightGroup GetOrCreate(int groupID)
@@ -75,10 +85,36 @@ public class LightManager : MonoBehaviour
 
     private void Update()
     {
+        if(score > 0)
+        {
+            Groups[0].SetLightIntensity(score / maxScore);
+            Debug.Log(score / maxScore);
+        }
+
+        if(score > 2 && score != oldScore)
+        {
+            CollectionManager.Instance.SpawnFlyingLantern();
+            oldScore = score;
+        }
+
+        if(score > 9)
+        {
+            Groups[1].SetLightIntensity((score - 9) / (maxScore - 9));
+            Debug.Log((score - 9) / (maxScore - 9));
+        }
+
+
         //          DEBUG
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
         //    Blackout();
+        //}
+
+
+        //float value = Mathf.Sin(Time.realtimeSinceStartup * 3.0f) * 0.5f + 0.5f;
+        //foreach (LightScript light in AllLights)
+        //{
+        //    light.SetIntensity(value);
         //}
     }
 

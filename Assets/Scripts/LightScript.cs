@@ -6,15 +6,31 @@ public class LightScript : MonoBehaviour
 {
     public int groupID;
 
+    public bool isDynamicGI;
+    private Renderer rend;
+    private Color color;
 
-    // Start is called before the first frame update
     void Start()
     {
+        rend = GetComponent<Renderer>();
+        color = rend.material.GetColor("_EmissionColor");
 
+        if (isDynamicGI)
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+        }
     }
 
     public void SetIntensity(float val)
     {
-        //SetEmmission(rend, color * val)
+        if (isDynamicGI)
+        {
+            DynamicGI.SetEmissive(rend, color * val);
+        }
+        else
+        {
+            rend.material.SetColor("_EmissionColor", color * val);
+            Debug.Log(color * val);
+        }
     }
 }
