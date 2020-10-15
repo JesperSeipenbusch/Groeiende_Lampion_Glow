@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CollectionManager : MonoBehaviour
 {
+    public static CollectionManager Instance;
+
     [SerializeField]
-    static int score = 0;
+    int score = 0;
 
     private int maxCollectables;
     static int currentCollectables;
@@ -32,8 +34,12 @@ public class CollectionManager : MonoBehaviour
 
     float depth;
 
-    Vector3 CollectableRP;
-    public static Vector3 flyingLanternRP;
+    [HideInInspector]
+    public Vector3 CollectableRP;
+    [HideInInspector]
+    public Vector3 flyingLanternRP;
+    [HideInInspector]
+    public Vector3 targetRP;
     
     [Header("Screen corner positions")]
     [SerializeField]
@@ -43,8 +49,29 @@ public class CollectionManager : MonoBehaviour
 
     #endregion
 
+
+    public bool IsCollectable
+    {
+        get {return isCollectable; }
+        set 
+        {
+            isCollectable = value; 
+            if(isCollectable)
+            {
+                bottomMargin = 1f;
+                depth = 0f;
+            }
+            else
+            {
+                bottomMargin = 26f;
+                depth = 30;
+            }
+        }
+    }
     void Awake()
     {
+        Instance = this;
+
         cam = Camera.main;
 
         timer = 2f;
@@ -53,21 +80,12 @@ public class CollectionManager : MonoBehaviour
         bottomMargin = 0.3f;
         sideMargin = 0.3f;
 
-        isCollectable = true;
+        IsCollectable = true;
         maxCollectables = 4;
     }
     private void FixedUpdate()
     {
-        if(isCollectable)
-        {
-            bottomMargin = 1f;
-            depth = 0f;
-        }
-        else
-        {
-            bottomMargin = 26f;
-            depth = 30;
-        }
+        
         Timer();
         Findborders(depth);
     }
@@ -102,20 +120,25 @@ public class CollectionManager : MonoBehaviour
         else
         {
             SpawnFlyingLantern();
-            //return;
         }
     }
     void SpawnCollectable()
     {
-        isCollectable = true;
+        IsCollectable = true;
         CollectableRP = FindRandomPoint();
         Instantiate(collectable, CollectableRP, Quaternion.identity);
         currentCollectables++;
     }
 
+    public void FindTarget()
+    {
+        IsCollectable = true;
+        targetRP = FindRandomPoint();
+    }
+
     void SpawnFlyingLantern()
     {
-        isCollectable = false;
+        IsCollectable = false;
         flyingLanternRP = FindRandomPoint();
     
         Vector3 spawnPoint = new Vector3(0,-5,-10);
@@ -139,22 +162,16 @@ public class CollectionManager : MonoBehaviour
             return rp;
         }
     }
-    
-    #region Static Methods
-        
-    public static void AddScore()
+            
+    public void AddScore()
     {
         score++;
     }
-    public static void RemoveCollectableCount()
+    public void RemoveCollectableCount()
     {
         if(currentCollectables > 0)
         {
             currentCollectables -= 1;
         }
     }
-
-    #endregion
-
-
 }

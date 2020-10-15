@@ -10,7 +10,7 @@ public class FlyingLantern : MonoBehaviour
 
     void Awake()
     {
-        targetPos = CollectionManager.flyingLanternRP;
+        targetPos = CollectionManager.Instance.flyingLanternRP;
         StartCoroutine(MoveToPosition(this.gameObject.transform, targetPos, 1f));        
     }
 
