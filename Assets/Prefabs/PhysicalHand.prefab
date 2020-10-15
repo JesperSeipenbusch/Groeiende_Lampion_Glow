@@ -94,6 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a871e97b9fe0f044baaffb1aa997f122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualHand: {fileID: 8369484364573143889, guid: a38fe3e519cf0b2469f697bdd5f9706d, type: 3}
+  visualHand: {fileID: 5187725461686915173, guid: b41d295396b93864fa970b64e661a60a, type: 3}
   visualPos: {x: 0, y: 0, z: 0}
   depth: 0
