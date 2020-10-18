@@ -10,7 +10,7 @@ public class LightScript : MonoBehaviour
     private Renderer rend;
     private Color color;
 
-    void Start()
+    void Awake()
     {
         rend = GetComponent<Renderer>();
         color = rend.material.GetColor("_EmissionColor");

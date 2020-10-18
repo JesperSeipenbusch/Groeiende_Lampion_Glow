@@ -25,10 +25,16 @@ public class CollectionManager : MonoBehaviour
     public GameObject collectable;
 
     public GameObject flyingLantern;
+
+    public GameObject sun;
     
     [Header("Timer")]
     public float timer;
+    public float sunDown;
+    [Header("Position")]
+    public Vector3 sunPos;
 
+    private bool isRestarting;
 
     #region Screen
     Camera cam;
@@ -67,7 +73,7 @@ public class CollectionManager : MonoBehaviour
             isCollectable = value; 
             if(isCollectable)
             {
-                bottomMargin = 1f;
+                bottomMargin = 7.6f;
                 depth = 0f;
             }
             else
@@ -86,7 +92,7 @@ public class CollectionManager : MonoBehaviour
         timer = 2f;
         
         topMargin = 0.3f;
-        bottomMargin = 1f;
+        bottomMargin = 7.6f;
         sideMargin = 0.3f;
 
         IsCollectable = true;
@@ -94,9 +100,16 @@ public class CollectionManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        
-        Timer();
-        Findborders(depth);
+        if(score < LightManager.Instance.maxScore)
+        {
+            Timer();
+            Findborders(depth);
+        }
+        else if (!isRestarting)
+        {
+            StartCoroutine(Restart());
+            isRestarting = true;
+        }
     }
     void Findborders(float d)
     {
@@ -122,7 +135,7 @@ public class CollectionManager : MonoBehaviour
 
     void CheckMax()
     {
-        if(currentCollectables < maxCollectables)
+        if(currentCollectables < maxCollectables && (currentCollectables + score) < LightManager.Instance.maxScore)
         {
             SpawnCollectable();
         }
@@ -156,7 +169,7 @@ public class CollectionManager : MonoBehaviour
         Vector3 rp = new Vector3(Random.Range(lowerLeft.x, upperRight.x), Random.Range(lowerLeft.y, upperRight.y),  depth);
 
         //checks if there is another collectable nearby, if so returns and picks a new rp (random position).
-        Collider[] hitColliders = Physics.OverlapSphere(rp, 1f);
+        Collider[] hitColliders = Physics.OverlapSphere(rp, 1f, 0);
         if(hitColliders.Length > 0)
         {
             //Debug.Log("Found something... Finding new Random point");
@@ -178,5 +191,15 @@ public class CollectionManager : MonoBehaviour
         {
             currentCollectables -= 1;
         }
+    }
+
+    public IEnumerator Restart()
+    {
+        Instantiate(sun, sunPos, Quaternion.identity);
+        yield return new WaitForSeconds(2f);
+        Score = 0;
+        LightManager.Instance.Blackout();
+        yield return new WaitForSeconds(2.5f);
+        isRestarting = false;
     }
 }

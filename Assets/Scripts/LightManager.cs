@@ -119,7 +119,7 @@ public class LightManager : MonoBehaviour
     }
 
     //Turns all lights off
-    void Blackout()
+    public void Blackout()
     {
         for (int i = 0; i < AllLights.Count; i++)
         {
