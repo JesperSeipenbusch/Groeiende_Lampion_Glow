@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f6431b87c6fd7d248afbcea9d1564077, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,4 +96,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualHand: {fileID: 5187725461686915173, guid: b41d295396b93864fa970b64e661a60a, type: 3}
   visualPos: {x: 0, y: 0, z: 0}
-  depth: 0
+  depth: 10
